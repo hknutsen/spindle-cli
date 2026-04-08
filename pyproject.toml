@@ -1,0 +1,24 @@
+[project]
+name = "spindle-cli"
+version = "0.1.0"
+description = "A command-line interface for syncing your music library to multiple audio formats"
+readme = "README.md"
+authors = [
+    { name = "Henrik Knutsen", email = "henrikknutsen@outlook.com" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "typer>=0.24.1",
+]
+
+[project.scripts]
+spindle = "spindle_cli.main:app"
+
+[build-system]
+requires = ["uv_build>=0.10.6,<0.11.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "ruff>=0.15.9",
+]
