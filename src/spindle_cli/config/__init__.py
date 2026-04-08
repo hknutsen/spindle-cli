@@ -2,5 +2,5 @@ import typer
 
 from .list import app as list_app
 
-app = typer.Typer(name="config", help="Configure spindle.")
+app = typer.Typer(name="config", help="Configure spindle.", no_args_is_help=True)
 app.add_typer(list_app)

@@ -6,7 +6,8 @@ import typer
 from .config import app as config_app
 
 app = typer.Typer(
-    help="A command-line interface for syncing your music library to multiple audio formats."
+    help="A command-line interface for syncing your music library to multiple audio formats.",
+    no_args_is_help=True,
 )
 app.add_typer(config_app)
 
