@@ -36,7 +36,7 @@ def main(ctx: typer.Context) -> None:
             "bitrate": "128",
             "vbr": "true",
         }
-        with open(config_file, "w") as f:
+        with config_file.open("w") as f:
             config.write(f, space_around_delimiters=False)
 
     ctx.ensure_object(dict)
