@@ -2,7 +2,9 @@ import typer
 
 from .get import app as get_app
 from .list import app as list_app
+from .set import app as set_app
 
 app = typer.Typer(name="config", help="Configure spindle.", no_args_is_help=True)
 app.add_typer(get_app)
 app.add_typer(list_app)
+app.add_typer(set_app)
