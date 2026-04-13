@@ -1,3 +1,4 @@
+import re
 from configparser import ConfigParser
 from typing import Annotated
 
@@ -16,11 +17,12 @@ def get(
         ),
     ],
 ):
-    if "." not in key:
+    m = re.fullmatch(r"([a-z]+)\.([a-z]+)", key)
+    if not m:
         raise typer.BadParameter(
             "Key must be in format 'SECTION.NAME'.", param_hint="'key'"
         )
-    section, name = key.split(".", maxsplit=1)
+    section, name = m.groups()
 
     config: ConfigParser = ctx.obj["config"]
     if section not in config:

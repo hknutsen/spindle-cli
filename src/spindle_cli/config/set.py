@@ -1,3 +1,4 @@
+import re
 from configparser import ConfigParser
 from pathlib import Path
 from typing import Annotated
@@ -17,17 +18,13 @@ def set(
         ),
     ],
 ):
-    if "=" not in key_value:
+    m = re.fullmatch(r"([a-z]+)\.([a-z]+)=(.+)", key_value)
+    if not m:
         raise typer.BadParameter(
-            "Key-value pair must be in format 'KEY=VALUE'.", param_hint="'key_value'"
+            "Key-value pair must be in format 'SECTION.NAME=VALUE'.",
+            param_hint="'key_value'",
         )
-    key, value = key_value.split("=", maxsplit=1)
-
-    if "." not in key:
-        raise typer.BadParameter(
-            "Key must be in format 'SECTION.NAME'.", param_hint="'key_value'"
-        )
-    section, name = key.split(".", maxsplit=1)
+    section, name, value = m.groups()
 
     config: ConfigParser = ctx.obj["config"]
     if section not in config:
